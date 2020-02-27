@@ -1,0 +1,113 @@
+/*
+Alinhamentos, espaçamentos, larguras e alturas
+
+GLOBALS
+ */
+*{
+    /*  correcao do padrao de css  */
+    box-sizing: border-box;
+}
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 50vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+
+    /* fonte */
+    font-family: 'Roboto', sans-serif;
+
+    /*  */
+    background-color: #f9f9f9;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.card-header{
+    background-color: lavender;
+}
+
+.nav-item{
+    font-size: large;
+    padding-right: 20px;
+}
+
+.links > a {
+    color: blue;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.table-comics{
+}
+
+.comics{
+    color: black;
+    padding: 0 20px;
+    font-size: 15px;
+}
+
+.comics span{
+    font-weight: bold;
+    color: gray;
+}
+
+.comics span.url{
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.isDisabled {
+    color: currentColor;
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+
+
+
+
+
+
