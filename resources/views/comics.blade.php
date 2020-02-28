@@ -3,11 +3,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="card">
+                <div class="total-coletado">Exibindo um total de: {{$totalColetado}}</div>
                 @foreach($tituloGeral as $k => $v)
                     <div class="card-header">
                         <h2>
                             {{$tituloGeral[$k]['titulogeral']}}
                         </h2>
+                        <p>Nesta seção temos um total de {{count($tituloGeral[$k]['url'])}} Revistas</p>
                     </div>
                     <br/>
                     <TABLE BORDER=0 class="table-comics">

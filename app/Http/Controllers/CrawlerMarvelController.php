@@ -17,7 +17,7 @@ class CrawlerMarvelController extends Controller
         $teste = Str::after($response, '<section class="module JMMultiRow moduColor_Light no-stripes" id="onsale">');
         $exibe1 = Str::before($teste, 'footer');
         $keywords = preg_split('/\s+v|<div class="row-item comic-item">\s+/i', $exibe1);
-//        $totalColetado = 0;
+        $totalColetado = 0;
         $tituloGeral = array();
         foreach ($keywords as $k => $v) {
 
@@ -37,7 +37,7 @@ class CrawlerMarvelController extends Controller
                         $limpaTituloComic1 = Str::after($keywords[$k], '<a href="   //');
                         $limpaTituloComic2 = Str::before($limpaTituloComic1, '" class="');
                         array_push($tituloGeral[$idTituloGeral]['url'], trim('https://' . $limpaTituloComic2));
-//                        $totalColetado += 1;
+                        $totalColetado += 1;
 
                         if (Str::contains($keywords[$k], '<p class="meta-creators">')) {
                             $limpaCreatorsComic1 = Str::after($keywords[$k], '<p class="meta-creators">');
@@ -66,6 +66,6 @@ class CrawlerMarvelController extends Controller
                 }
             }
         }
-        return view('comics', compact('tituloGeral'));
+        return view('comics', compact('tituloGeral', 'totalColetado'));
     }
 }
