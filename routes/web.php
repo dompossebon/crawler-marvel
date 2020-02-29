@@ -19,4 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/comics', 'CrawlerMarvelController@comics')->name('comics');
+Route::get('/comicsCrawler', 'CrawlerMarvelController@comicsCrawler')->name('comicsCrawler');
+
+Route::get('/comicsApi', 'CrawlerMarvelController@comicsApi')->name('comicsApi');
+
+Route::get('/comicApi/{id}', 'CrawlerMarvelController@comicApi')->name('comicApi');
+
+Route::get('/charactersApi', 'CrawlerMarvelController@charactersApi')->name('charactersApi');
+Route::get('/characterApi/{id}', 'CrawlerMarvelController@characterApi')->name('character');
