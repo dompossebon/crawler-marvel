@@ -28,8 +28,6 @@ cd crawler-marvel
 em seguida execute o comandos abaixo:
 
 composer install
-Caso aconteça erro de permissão, lembre-se de executar: (sudo chown -R $USER .) dentro do diretorio /bussolasocial
-e então repita o comando (composer install)
 
 Na raiz do projeto localize e Duplique o arquivo .env.example e em seguida renomeie-o para .env usando o comando:
 
