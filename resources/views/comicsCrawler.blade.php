@@ -3,22 +3,22 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="card">
-                <div class="total-coletado">Exibindo um total de: {{$totalColetado}}</div>
-                @foreach($tituloGeral as $k => $v)
+                <div class="total-coletado">Displaying a total of: {{$totalCollected}}</div>
+                @foreach($generalTitle as $key => $v)
                     <div class="card-header">
                         <h2>
-                            {{$tituloGeral[$k]['titulogeral']}}
+                            {{$generalTitle[$key]['generalTitle']}}
                         </h2>
-                        <p>Nesta seção temos um total de {{count($tituloGeral[$k]['url'])}} Revistas</p>
+                        <p>In this section we have a total of {{count($generalTitle[$key]['url'])}} Magazines</p>
                     </div>
                     <br/>
                     <TABLE BORDER=0 class="table-comics">
-                        @for ($i = 0; $i < count($tituloGeral[$k]['url']); $i++)
+                        @for ($i = 0; $i < count($generalTitle[$key]['url']); $i++)
                             <TR>
                                 <TD>
-                                    <a href="{!!  '/detailOption/'.$tituloGeral[$k]['id'][$i].'/'.'comics'  !!}">
+                                    <a href="{!!  '/detailOption/'.$generalTitle[$key]['id'][$i].'/'.'comics'  !!}">
                                         <img
-                                            src="{!! asset($tituloGeral[$k]['imagem'][$i]) !!}" width="130px"
+                                            src="{!! asset($generalTitle[$key]['image'][$i]) !!}" width="130px"
                                             height="200px">
                                     </a>
                                 </TD>
@@ -26,13 +26,13 @@
                                     <div class="comics">
                                         <br />
                                         <p><span>{{ $i }}</span></p>
-                                        <p><span>Titulo:</span> {{ $tituloGeral[$k]['title'][$i] }}</p>
-                                        <p><span>Imagem:</span> {{ $tituloGeral[$k]['imagem'][$i] }}</p>
-                                        <p><span>URL: </span><span class="url">{{ $tituloGeral[$k]['url'][$i] }}</span></p>
-                                        <p><span>Criador:</span> {!! $tituloGeral[$k]['criadores'][$i] !!}</p>
-                                        <p><span>Detalhe Específico:</span>
-                                            <a href="{!!  '/detailOption/'.$tituloGeral[$k]['id'][$i].'/'.'comics'  !!}">
-                                                Clique Aqui
+                                        <p><span>Title:</span> {{ $generalTitle[$key]['title'][$i] }}</p>
+                                        <p><span>Image:</span> {{ $generalTitle[$key]['image'][$i] }}</p>
+                                        <p><span>URL: </span><span class="url">{{ $generalTitle[$key]['url'][$i] }}</span></p>
+                                        <p><span>Creators:</span> {!! $generalTitle[$key]['creators'][$i] !!}</p>
+                                        <p><span>Details:</span>
+                                            <a href="{!!  '/detailOption/'.$generalTitle[$key]['id'][$i].'/'.'comics'  !!}">
+                                                Click Here
                                                 <a/>
 
                                         </p>

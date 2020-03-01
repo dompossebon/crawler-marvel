@@ -41,6 +41,7 @@ class CrawlerMarvelController extends Controller
         $response = json_decode($response->getBody(), true);
         $page_data['copyright'] = $response['copyright'];
         $page_data['attributionText'] = $response['attributionText'];
+        $page_data['option'] = $option;
         $multiDatas = $response['data']['results'][0];
         $page_data['comic'] = $multiDatas;
         if (isset($multiDatas['series'])) {
@@ -57,62 +58,62 @@ class CrawlerMarvelController extends Controller
         $response = $client->request('GET', 'https://www.marvel.com/comics?&options%5Boffset%5D=0&totalcount=12');
         $response = $response->getBody()->getContents();
 
-        $teste = Str::after($response, '<section class="module JMMultiRow moduColor_Light no-stripes" id="onsale">');
-        $exibe1 = Str::before($teste, 'footer');
-        $keywords = preg_split('/\s+v|<div class="row-item comic-item">\s+/i', $exibe1);
-        $totalColetado = 0;
-        $tituloGeral = array();
+        $pageStart = Str::after($response, '<section class="module JMMultiRow moduColor_Light no-stripes" id="onsale">');
+        $closePage = Str::before($pageStart, 'footer');
+        $keywords = preg_split('/\s+v|<div class="row-item comic-item">\s+/i', $closePage);
+        $totalCollected = 0;
+        $generalTitle = array();
         foreach ($keywords as $k => $v) {
             if (Str::contains($keywords[$k], '<h2 class="module-header">')) {
                 $idTituloGeral = $k;
-                $limpaTituloGeral1 = Str::after($keywords[$k], '<h2 class="module-header">');
-                $limpaTituloGeral11 = Str::before($limpaTituloGeral1, '<');
-                $tituloGeral[$k]['titulogeral'] = trim($limpaTituloGeral11);
-                $tituloGeral[$k]['id'] = [];
-                $tituloGeral[$k]['url'] = [];
-                $tituloGeral[$k]['title'] = [];
-                $tituloGeral[$k]['imagem'] = [];
-                $tituloGeral[$k]['criadores'] = [];
+                $startGeneralTitle = Str::after($keywords[$k], '<h2 class="module-header">');
+                $closeGeneralTitle = Str::before($startGeneralTitle, '<');
+                $generalTitle[$k]['generalTitle'] = trim($closeGeneralTitle);
+                $generalTitle[$k]['id'] = [];
+                $generalTitle[$k]['url'] = [];
+                $generalTitle[$k]['title'] = [];
+                $generalTitle[$k]['image'] = [];
+                $generalTitle[$k]['creators'] = [];
 
                 foreach ($keywords as $k => $v) {
                     if (Str::contains($keywords[$k], '<div class="row-item-image">')) {
-                        $limpaTituloComic1 = Str::after($keywords[$k], '<a href="   //');
-                        $limpaTituloComic2 = Str::before($limpaTituloComic1, '" class="');
-                        array_push($tituloGeral[$idTituloGeral]['url'], trim('https://' . $limpaTituloComic2));
-                        $totalColetado += 1;
+                        $startTitleComic = Str::after($keywords[$k], '<a href="   //');
+                        $closeTitleComic = Str::before($startTitleComic, '" class="');
+                        array_push($generalTitle[$idTituloGeral]['url'], trim('https://' . $closeTitleComic));
+                        $totalCollected += 1;
 
 
-                        $limpaTituloId1 = Str::after($limpaTituloComic2, '/issue/');
-                        $limpaTituloId2 = Str::before($limpaTituloId1, '/');
-                        array_push($tituloGeral[$idTituloGeral]['id'], trim($limpaTituloId2));
+                        $startTitleId = Str::after($closeTitleComic, '/issue/');
+                        $closeTitleId = Str::before($startTitleId, '/');
+                        array_push($generalTitle[$idTituloGeral]['id'], trim($closeTitleId));
 
                         if (Str::contains($keywords[$k], '<p class="meta-creators">')) {
-                            $limpaCreatorsComic1 = Str::after($keywords[$k], '<p class="meta-creators">');
-                            $limpaCreatorsComic2 = Str::before($limpaCreatorsComic1, '</p>');
-                            array_push($tituloGeral[$idTituloGeral]['criadores'], trim($limpaCreatorsComic2));
+                            $startCreatorsComic = Str::after($keywords[$k], '<p class="meta-creators">');
+                            $closeCreatorsComic = Str::before($startCreatorsComic, '</p>');
+                            array_push($generalTitle[$idTituloGeral]['creators'], trim($closeCreatorsComic));
                         } else {
-                            array_push($tituloGeral[$idTituloGeral]['criadores'], 'Author Not Informed by Marvel');
+                            array_push($generalTitle[$idTituloGeral]['creators'], 'Author Not Informed by Marvel');
                         }
 
                         if (Str::contains($keywords[$k], '<img src="https')) {
-                            $limpaImagemComic1 = Str::after($keywords[$k], '<img src="');
-                            $limpaImagemComic2 = Str::before($limpaImagemComic1, '" alt="');
-                            array_push($tituloGeral[$idTituloGeral]['imagem'], trim($limpaImagemComic2));
+                            $startImageComic = Str::after($keywords[$k], '<img src="');
+                            $closeImageComic = Str::before($startImageComic, '" alt="');
+                            array_push($generalTitle[$idTituloGeral]['image'], trim($closeImageComic));
                         } else {
-                            array_push($tituloGeral[$idTituloGeral]['imagem'], 'Problema com Imagem - Comics');
+                            array_push($generalTitle[$idTituloGeral]['image'], 'Problem with Image - Comics');
                         }
 
                         if (Str::contains($keywords[$k], '" alt="')) {
-                            $limpaTitleComic1 = Str::after($keywords[$k], '" alt="');
-                            $limpaTitleComic2 = Str::before($limpaTitleComic1, '" title="');
-                            array_push($tituloGeral[$idTituloGeral]['title'], trim($limpaTitleComic2));
+                            $startTitleComic = Str::after($keywords[$k], '" alt="');
+                            $closeTitleComic = Str::before($startTitleComic, '" title="');
+                            array_push($generalTitle[$idTituloGeral]['title'], trim($closeTitleComic));
                         } else {
-                            array_push($tituloGeral[$idTituloGeral]['title'], 'Problema com Título - Comics');
+                            array_push($generalTitle[$idTituloGeral]['title'], 'Problema com Título - Comics');
                         }
                     }
                 }
             }
         }
-        return view('comicsCrawler', compact('tituloGeral', 'totalColetado'));
+        return view('comicsCrawler', compact('generalTitle', 'totalCollected'));
     }
 }

@@ -6,7 +6,7 @@
                 <br/>
                 <p>Crawler in Marvel by Laravel</p>
                 &
-                <p>Consumo de API Marvel by Laravel</p>
+                <p>API consumption Marvel by Laravel</p>
             </div>
             <p>By Possebon</p>
             <p>dompossebon@gmail.com</p>

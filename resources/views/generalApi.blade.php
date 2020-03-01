@@ -30,15 +30,15 @@
                                 <TD>
                                     <div class="comics">
                                         <br/>
-                                        <p><span>Titulo:</span> {{ $multiData['title'] ?? $multiData['name'] }}</p>
+                                        <p><span>Title:</span> {{ $multiData['title'] ?? $multiData['name'] }}</p>
                                         @if($multiData['description'] != null)
-                                        <p><span>Descrição:</span> {{ Str::limit($multiData['description'], 160) }}</p>
+                                        <p><span>Description:</span> {{ Str::limit($multiData['description'], 160) }}</p>
                                         @else
-                                            <p><span>Descrição: Não Possui</span>
+                                            <p><span>Description: Does Not Existe</span>
                                         @endif
-                                        <p><span>Detalhe Específico:</span>
+                                        <p><span>Details:</span>
                                             <a href=" {!!  '/detailOption/'.$multiData['id'].'/'.$option  !!} ">
-                                                Clique Aqui
+                                                Click Here
                                             </a>
                                                 </p>
                                     </div>

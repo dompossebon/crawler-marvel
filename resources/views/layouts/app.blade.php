@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                Principal =>
+                Main =>
             </a>
             {{--                <div class="navbar-brand links">--}}
 
@@ -49,16 +49,16 @@
                         <a href="{{ asset('/multiOption/comics') }}">Comics/API </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('/multiOption/characters') }}">Personagens </a>
+                        <a href="{{ asset('/multiOption/characters') }}">Characters </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('multiOption/events') }}">Eventos </a>
+                        <a href="{{ asset('multiOption/events') }}">Events </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('multiOption/series') }}">Séries </a>
+                        <a href="{{ asset('multiOption/series') }}">Series </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('multiOption/stories') }}">Histórias </a>
+                        <a href="{{ asset('multiOption/stories') }}">Stories </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ asset('comicsCrawler') }}">Comics/Crawler </a>

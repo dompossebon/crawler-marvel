@@ -7,12 +7,18 @@
                     <h2>
                         {{ $attributionText }}
                     </h2>
-                    {{ $copyright }}
+                    {{ $copyright }} - {{ $option }}
                 </div>
                 <div class="results">
                     <article>
+                        @if(isset($comic['thumbnail']))
                         <img src="{{ $comic['thumbnail']['path'] }}/portrait_fantastic.jpg"
                              alt="{{ $comic['title'] ?? $comic['name']}}">
+                        @else
+                            <p>Does Not Exist Image</p>
+                            <p>Does Not Exist Image</p>
+                            <p>Does Not Exist Image</p>
+                            @endif
 
                         <h2>{{ $comic['title'] ?? $comic['name'] }}</h2>
                         <p>
@@ -23,7 +29,7 @@
 
                         <div id="series">series
                             <h2>{{ $series['title'] ?? ''}}</h2>
-                            <p>
+                            Description<p>
                                 {!! $series['description'] ?? 'Does not exist' !!}
                             </p>
                             <div id="series">
@@ -73,7 +79,7 @@
                             </div>
                         </div>
                             @else
-                            <div id="startYear">series
+                            <div id="comic">series
                                 <h2>{{ $comic['title'] ?? ''}}</h2>
                                 Description<p>
                                     {!! $comic['description'] ?? 'Does not exist' !!}
