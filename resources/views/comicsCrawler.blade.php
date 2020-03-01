@@ -16,7 +16,7 @@
                         @for ($i = 0; $i < count($tituloGeral[$k]['url']); $i++)
                             <TR>
                                 <TD>
-                                    <a href=" {!!  '/comicApi/'.$tituloGeral[$k]['id'][$i]  !!} ">
+                                    <a href="{!!  '/detailOption/'.$tituloGeral[$k]['id'][$i].'/'.'comics'  !!}">
                                         <img
                                             src="{!! asset($tituloGeral[$k]['imagem'][$i]) !!}" width="130px"
                                             height="200px">
@@ -31,9 +31,10 @@
                                         <p><span>URL: </span><span class="url">{{ $tituloGeral[$k]['url'][$i] }}</span></p>
                                         <p><span>Criador:</span> {!! $tituloGeral[$k]['criadores'][$i] !!}</p>
                                         <p><span>Detalhe Específico:</span>
-                                            <a href=" {!!  '/comicApi/'.$tituloGeral[$k]['id'][$i]  !!} ">
+                                            <a href="{!!  '/detailOption/'.$tituloGeral[$k]['id'][$i].'/'.'comics'  !!}">
                                                 Clique Aqui
                                                 <a/>
+
                                         </p>
                                     </div>
                                 </TD>

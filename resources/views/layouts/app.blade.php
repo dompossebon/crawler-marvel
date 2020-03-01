@@ -46,19 +46,19 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li class="nav-item">
-                        <a href="{{ asset('comicsApi') }}">Comics/API </a>
+                        <a href="{{ asset('/multiOption/comics') }}">Comics/API </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('charactersApi') }}">Personagens </a>
+                        <a href="{{ asset('/multiOption/characters') }}">Personagens </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('eventsApi') }}">Eventos </a>
+                        <a href="{{ asset('multiOption/events') }}">Eventos </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('seriesApi') }}">Séries </a>
+                        <a href="{{ asset('multiOption/series') }}">Séries </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ asset('storiesApi') }}">Histórias </a>
+                        <a href="{{ asset('multiOption/stories') }}">Histórias </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ asset('comicsCrawler') }}">Comics/Crawler </a>

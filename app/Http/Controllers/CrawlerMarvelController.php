@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
-
 
 class CrawlerMarvelController extends Controller
 {
@@ -13,16 +11,11 @@ class CrawlerMarvelController extends Controller
 
     public function __construct()
     {
-
         $baseUrl = 'http://gateway.marvel.com/v1/public/';
-
         $public_key = '1747ef87891d75e5ff61d9f6d2fadcd7';
-
         $private_key = '3e49f306668367a1ee7ac0231b0009c3a69a2a19';
-
         $ts = time();
         $hash = md5($ts . $private_key . $public_key);
-
         $this->client = new Client([
             'base_uri' => $baseUrl,
             'query' => [
@@ -31,171 +24,31 @@ class CrawlerMarvelController extends Controller
                 'hash' => $hash
             ]
         ]);
-
     }
 
     public function multiOption($option)
     {
         $response = $this->client->get($option);
-
         $response = json_decode($response->getBody(), true);
         $multiDatas = $response['data']['results'];
-        return view('generalApi', ['multiDatas' => $multiDatas]);
+        return view('generalApi', ['multiDatas' => $multiDatas, 'option' => $option]);
     }
 
-
-
-
-    public function comicsApi()
-    {
-            $response = $this->client->get('comics');
-
-            $response = json_decode($response->getBody(), true);
-
-            $comics = $response['data']['results'];
-
-        return view('comicsApi', ['comics' => $comics]);
-
-    }
-
-    function comicApi($id)
+    function detailOption($id, $option)
     {
         $page_data = [];
-
-        $response = $this->client->get('comics/' . $id);
+        $response = $this->client->get($option . '/' . $id);
         $response = json_decode($response->getBody(), true);
         $page_data['copyright'] = $response['copyright'];
         $page_data['attributionText'] = $response['attributionText'];
-        $comic = $response['data']['results'][0];
-        $page_data['comic'] = $comic;
-
-        if (!empty($comic['series'])) {
-            $series_response = $this->client->get($comic['series']['resourceURI']);
+        $multiDatas = $response['data']['results'][0];
+        $page_data['comic'] = $multiDatas;
+        if (isset($multiDatas['series'])) {
+            $series_response = $this->client->get($multiDatas['series']['resourceURI'] ?? $multiDatas['series']['collectionURI']);
             $series_response = json_decode($series_response->getBody(), true);
             $page_data['series'] = $series_response['data']['results'][0];
         }
-        return view('comic', $page_data);
-    }
-
-    public function charactersApi()
-    {
-        $response = $this->client->get('characters');
-
-        $response = json_decode($response->getBody(), true);
-
-        $characters = $response['data']['results'];
-
-        return view('charactersApi', ['characters' => $characters]);
-
-    }
-
-    function characterApi($id)
-    {
-        $page_data = [];
-
-        $response = $this->client->get('characters/' . $id);
-        $response = json_decode($response->getBody(), true);
-        $page_data['copyright'] = $response['copyright'];
-        $page_data['attributionText'] = $response['attributionText'];
-        $characters = $response['data']['results'][0];
-        $page_data['characters'] = $characters;
-        if (!empty($characters['series'])) {
-            $series_response = $this->client->get($characters['series']['collectionURI']);
-            $series_response = json_decode($series_response->getBody(), true);
-            $page_data['series'] = $series_response['data']['results'][0];
-        }
-
-        return view('character', $page_data);
-    }
-
-
-
-
-    public function eventsApi()
-    {
-        $response = $this->client->get('events');
-
-        $response = json_decode($response->getBody(), true);
-        $events = $response['data']['results'];
-        return view('eventsApi', ['events' => $events]);
-    }
-
-    function eventApi($id)
-    {
-        $page_data = [];
-
-        $response = $this->client->get('events/' . $id);
-        $response = json_decode($response->getBody(), true);
-        $page_data['copyright'] = $response['copyright'];
-        $page_data['attributionText'] = $response['attributionText'];
-        $events = $response['data']['results'][0];
-        $page_data['events'] = $events;
-
-        if (!empty($events['series'])) {
-            $series_response = $this->client->get($events['series']['collectionURI']);
-            $series_response = json_decode($series_response->getBody(), true);
-            $page_data['series'] = $series_response['data']['results'][0];
-        }
-
-        return view('event', $page_data);
-    }
-
-    public function seriesApi()
-    {
-        $response = $this->client->get('series');
-
-        $response = json_decode($response->getBody(), true);
-        $series = $response['data']['results'];
-        return view('seriesApi', ['series' => $series]);
-    }
-
-    function serieApi($id)
-    {
-        $page_data = [];
-
-        $response = $this->client->get('series/' . $id);
-        $response = json_decode($response->getBody(), true);
-        $page_data['copyright'] = $response['copyright'];
-        $page_data['attributionText'] = $response['attributionText'];
-        $series = $response['data']['results'][0];
-        $page_data['series'] = $series;
-
-        if (!empty($series['series'])) {
-            $series_response = $this->client->get($series['series']['collectionURI']);
-            $series_response = json_decode($series_response->getBody(), true);
-            $page_data['series'] = $series_response['data']['results'][0];
-        }
-
-        return view('serie', $page_data);
-    }
-
-    public function storiesApi()
-    {
-        $response = $this->client->get('stories');
-
-        $response = json_decode($response->getBody(), true);
-        $stories = $response['data']['results'];
-        return view('storiesApi', ['stories' => $stories]);
-    }
-
-    function storieApi($id)
-    {
-        $page_data = [];
-
-        $response = $this->client->get('stories/' . $id);
-        $response = json_decode($response->getBody(), true);
-        $page_data['copyright'] = $response['copyright'];
-        $page_data['attributionText'] = $response['attributionText'];
-        $series = $response['data']['results'][0];
-        $page_data['series'] = $series;
-
-        if (!empty($series['series'])) {
-            $series_response = $this->client->get($series['series']['collectionURI']);
-            $series_response = json_decode($series_response->getBody(), true);
-            $page_data['series'] = $series_response['data']['results'][0];
-        }
-
-        return view('serie', $page_data);
+        return view('detailApi', $page_data);
     }
 
     public function comicsCrawler()
@@ -210,7 +63,6 @@ class CrawlerMarvelController extends Controller
         $totalColetado = 0;
         $tituloGeral = array();
         foreach ($keywords as $k => $v) {
-
             if (Str::contains($keywords[$k], '<h2 class="module-header">')) {
                 $idTituloGeral = $k;
                 $limpaTituloGeral1 = Str::after($keywords[$k], '<h2 class="module-header">');
@@ -223,7 +75,6 @@ class CrawlerMarvelController extends Controller
                 $tituloGeral[$k]['criadores'] = [];
 
                 foreach ($keywords as $k => $v) {
-
                     if (Str::contains($keywords[$k], '<div class="row-item-image">')) {
                         $limpaTituloComic1 = Str::after($keywords[$k], '<a href="   //');
                         $limpaTituloComic2 = Str::before($limpaTituloComic1, '" class="');
@@ -264,6 +115,4 @@ class CrawlerMarvelController extends Controller
         }
         return view('comicsCrawler', compact('tituloGeral', 'totalColetado'));
     }
-
-
 }
