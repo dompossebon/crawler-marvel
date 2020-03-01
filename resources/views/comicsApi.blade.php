@@ -17,10 +17,8 @@
                                 <TD>
                                     <a href=" {!!  '/comicApi/'.$com['id']  !!} ">
                                         <img
-                                            src="{{ $com['thumbnail']['path'] }}/portrait_incredible.jpg"
-                                            alt="{{ $com['title'] }}"
-                                            width="130px"
-                                            height="200px">
+                                            src="{{ $com['thumbnail']['path'] }}/portrait_fantastic.jpg"
+                                            alt="{{ $com['title'] }}">
                                     </a>
                                 </TD>
                                 <TD>

@@ -8,26 +8,25 @@
                         Comics
                     </h2>
                 </div>
-                @foreach($characters as $character)
+                @foreach($multiDatas as $multiData)
 
                     <article class="card">
 
                         <TABLE BORDER=0 class="table-comics">
                             <TR>
                                 <TD>
-                                    <a href=" {!!  '/characterApi/'.$character['id']  !!} ">
+                                    <a href=" {!!  '/comicApi/'.$multiData['id']  !!} ">
                                         <img
-                                            src="{{ $character['thumbnail']['path'] }}/portrait_fantastic.jpg"
-                                            alt="{{ $character['name'] }}">
+                                            src="{{ $multiData['thumbnail']['path'] }}/portrait_fantastic.jpg">
                                     </a>
                                 </TD>
                                 <TD>
                                     <div class="comics">
                                         <br/>
-                                        <p><span>Nome do Personagem:</span> {{ $character['name'] }}</p>
-                                        <p><span>Descrição:</span> {{ Str::limit($character['description'], 160) }}</p>
+                                        <p><span>Titulo:</span> {{ $multiData['title'] ?? $multiData['name'] }}</p>
+                                        <p><span>Descrição:</span> {{ Str::limit($multiData['description'], 160) }}</p>
                                         <p><span>Detalhe Específico:</span>
-                                            <a href=" {!!  '/characterApi/'.$character['id']  !!} ">
+                                            <a href=" {!!  '/comicApi/'.$multiData['id']  !!} ">
                                                 Clique Aqui
                                                 <a/>
                                                 </p>

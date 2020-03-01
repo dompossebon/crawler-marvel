@@ -5,29 +5,27 @@
             <div class="card">
                 <div class="card-header">
                     <h2>
-                        Comics
+                        Histórias
                     </h2>
                 </div>
-                @foreach($characters as $character)
+                @foreach($stories as $storie)
 
                     <article class="card">
 
                         <TABLE BORDER=0 class="table-comics">
                             <TR>
-                                <TD>
-                                    <a href=" {!!  '/characterApi/'.$character['id']  !!} ">
-                                        <img
-                                            src="{{ $character['thumbnail']['path'] }}/portrait_fantastic.jpg"
-                                            alt="{{ $character['name'] }}">
+                                <TD width="300">
+                                    <p>Título:</p>
+                                    <a href=" {!!  '/storieApi/'.$storie['id']  !!} ">
+                                        {{ $storie['title'] }}
                                     </a>
                                 </TD>
                                 <TD>
                                     <div class="comics">
                                         <br/>
-                                        <p><span>Nome do Personagem:</span> {{ $character['name'] }}</p>
-                                        <p><span>Descrição:</span> {{ Str::limit($character['description'], 160) }}</p>
+                                        <p><span>Edição original:</span> {{ $storie['originalIssue']['name'] }}</p>
                                         <p><span>Detalhe Específico:</span>
-                                            <a href=" {!!  '/characterApi/'.$character['id']  !!} ">
+                                            <a href=" {!!  '/storieApi/'.$storie['id']  !!} ">
                                                 Clique Aqui
                                                 <a/>
                                                 </p>

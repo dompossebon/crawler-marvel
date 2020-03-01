@@ -5,29 +5,29 @@
             <div class="card">
                 <div class="card-header">
                     <h2>
-                        Comics
+                        Events
                     </h2>
                 </div>
-                @foreach($characters as $character)
+                @foreach($events as $event)
 
                     <article class="card">
 
                         <TABLE BORDER=0 class="table-comics">
                             <TR>
                                 <TD>
-                                    <a href=" {!!  '/characterApi/'.$character['id']  !!} ">
+                                    <a href=" {!!  '/eventApi/'.$event['id']  !!} ">
                                         <img
-                                            src="{{ $character['thumbnail']['path'] }}/portrait_fantastic.jpg"
-                                            alt="{{ $character['name'] }}">
+                                            src="{{ $event['thumbnail']['path'] }}//portrait_fantastic.jpg"
+                                            alt="{{ $event['title'] }}">
                                     </a>
                                 </TD>
                                 <TD>
                                     <div class="comics">
                                         <br/>
-                                        <p><span>Nome do Personagem:</span> {{ $character['name'] }}</p>
-                                        <p><span>Descrição:</span> {{ Str::limit($character['description'], 160) }}</p>
+                                        <p><span>Titulo:</span> {{ $event['title'] }}</p>
+                                        <p><span>Descrição:</span> {{ Str::limit($event['description'], 160) }}</p>
                                         <p><span>Detalhe Específico:</span>
-                                            <a href=" {!!  '/characterApi/'.$character['id']  !!} ">
+                                            <a href=" {!!  '/eventApi/'.$event['id']  !!} ">
                                                 Clique Aqui
                                                 <a/>
                                                 </p>

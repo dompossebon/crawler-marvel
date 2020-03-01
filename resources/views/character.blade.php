@@ -10,9 +10,7 @@
                     {{ $copyright }}
                 <div class="results">
                     <article>
-                        <img src="{{ $characters['thumbnail']['path'] }}.jpg" alt="{{ $characters['name'] }}"
-                             width="250px"
-                             height="409px">
+                        <img src="{{ $characters['thumbnail']['path'] }}/portrait_fantastic.jpg" alt="{{ $characters['name'] }}">
 
                         <h2>{{ $characters['name'] }}</h2>
                         <p>

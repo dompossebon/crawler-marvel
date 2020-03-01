@@ -52,16 +52,13 @@
                         <a href="{{ asset('charactersApi') }}">Personagens </a>
                     </li>
                     <li class="nav-item">
-                        <a href=" ">Criadores </a>
+                        <a href="{{ asset('eventsApi') }}">Eventos </a>
                     </li>
                     <li class="nav-item">
-                        <a href=" ">Eventos </a>
+                        <a href="{{ asset('seriesApi') }}">Séries </a>
                     </li>
                     <li class="nav-item">
-                        <a href=" ">Séries </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href=" ">Histórias </a>
+                        <a href="{{ asset('storiesApi') }}">Histórias </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ asset('comicsCrawler') }}">Comics/Crawler </a>

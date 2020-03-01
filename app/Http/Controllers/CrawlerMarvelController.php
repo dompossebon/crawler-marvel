@@ -34,6 +34,18 @@ class CrawlerMarvelController extends Controller
 
     }
 
+    public function multiOption($option)
+    {
+        $response = $this->client->get($option);
+
+        $response = json_decode($response->getBody(), true);
+        $multiDatas = $response['data']['results'];
+        return view('generalApi', ['multiDatas' => $multiDatas]);
+    }
+
+
+
+
     public function comicsApi()
     {
             $response = $this->client->get('comics');
@@ -95,6 +107,97 @@ class CrawlerMarvelController extends Controller
 
         return view('character', $page_data);
     }
+
+
+
+
+    public function eventsApi()
+    {
+        $response = $this->client->get('events');
+
+        $response = json_decode($response->getBody(), true);
+        $events = $response['data']['results'];
+        return view('eventsApi', ['events' => $events]);
+    }
+
+    function eventApi($id)
+    {
+        $page_data = [];
+
+        $response = $this->client->get('events/' . $id);
+        $response = json_decode($response->getBody(), true);
+        $page_data['copyright'] = $response['copyright'];
+        $page_data['attributionText'] = $response['attributionText'];
+        $events = $response['data']['results'][0];
+        $page_data['events'] = $events;
+
+        if (!empty($events['series'])) {
+            $series_response = $this->client->get($events['series']['collectionURI']);
+            $series_response = json_decode($series_response->getBody(), true);
+            $page_data['series'] = $series_response['data']['results'][0];
+        }
+
+        return view('event', $page_data);
+    }
+
+    public function seriesApi()
+    {
+        $response = $this->client->get('series');
+
+        $response = json_decode($response->getBody(), true);
+        $series = $response['data']['results'];
+        return view('seriesApi', ['series' => $series]);
+    }
+
+    function serieApi($id)
+    {
+        $page_data = [];
+
+        $response = $this->client->get('series/' . $id);
+        $response = json_decode($response->getBody(), true);
+        $page_data['copyright'] = $response['copyright'];
+        $page_data['attributionText'] = $response['attributionText'];
+        $series = $response['data']['results'][0];
+        $page_data['series'] = $series;
+
+        if (!empty($series['series'])) {
+            $series_response = $this->client->get($series['series']['collectionURI']);
+            $series_response = json_decode($series_response->getBody(), true);
+            $page_data['series'] = $series_response['data']['results'][0];
+        }
+
+        return view('serie', $page_data);
+    }
+
+    public function storiesApi()
+    {
+        $response = $this->client->get('stories');
+
+        $response = json_decode($response->getBody(), true);
+        $stories = $response['data']['results'];
+        return view('storiesApi', ['stories' => $stories]);
+    }
+
+    function storieApi($id)
+    {
+        $page_data = [];
+
+        $response = $this->client->get('stories/' . $id);
+        $response = json_decode($response->getBody(), true);
+        $page_data['copyright'] = $response['copyright'];
+        $page_data['attributionText'] = $response['attributionText'];
+        $series = $response['data']['results'][0];
+        $page_data['series'] = $series;
+
+        if (!empty($series['series'])) {
+            $series_response = $this->client->get($series['series']['collectionURI']);
+            $series_response = json_decode($series_response->getBody(), true);
+            $page_data['series'] = $series_response['data']['results'][0];
+        }
+
+        return view('serie', $page_data);
+    }
+
     public function comicsCrawler()
     {
         $client = new Client();

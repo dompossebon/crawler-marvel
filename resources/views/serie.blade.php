@@ -11,11 +11,11 @@
                 </div>
                 <div class="results">
                     <article>
-                        <img src="{{ $comic['thumbnail']['path'] }}/portrait_fantastic.jpg" alt="{{ $comic['title'] }}">
+                        <img src="{{ $series['thumbnail']['path'] }}/portrait_fantastic.jpg" alt="{{ $series['title'] }}">
 
-                        <h2>{{ $comic['title'] }}</h2>
+                        <h2>{{ $series['title'] }}</h2>
                         <p>
-                             {!! $comic['description'] !!}
+                             {!! $series['description'] !!}
                         </p>
                         <div id="series">
                             <h3>From Series: {{ $series['title'] }}</h3>
