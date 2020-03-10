@@ -3,9 +3,7 @@
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title m-b-md">
-                <br/>
                 <p>Crawler in Marvel by Laravel</p>
-                &
                 <p>API consumption Marvel by Laravel</p>
             </div>
             <p>By Possebon</p>
